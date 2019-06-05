@@ -1,3 +1,11 @@
+'''
+calls the add function inside libtest2.so file.
+libtest2.so is shared library file produced from GCC with the test2.c file.
+
+Check the Calling C functions*.html file for the detailed instructions.
+
+'''
+
 from ctypes import *
 from cffi import FFI
 import random
