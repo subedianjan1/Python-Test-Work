@@ -1,0 +1,1439 @@
+ <!DOCTYPE html> 
+
+<html data-rtl="false" lang="en-US">
+    <head>
+	<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="pingback" href="https://www.csestack.org/xmlrpc.php" /> 
+        <title>Calling C Functions from Python [Step by Step Procedure]</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v11.3 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="How to use ctype module for calling c functions from python? Commands for generating shared object file."/>
+<link rel="canonical" href="https://www.csestack.org/calling-c-functions-from-python/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Calling C Functions from Python [Step by Step Procedure]" />
+<meta property="og:description" content="How to use ctype module for calling c functions from python? Commands for generating shared object file." />
+<meta property="og:url" content="https://www.csestack.org/calling-c-functions-from-python/" />
+<meta property="og:site_name" content="CSEstack" />
+<meta property="article:publisher" content="https://www.facebook.com/CSEStack/" />
+<meta property="article:author" content="https://www.facebook.com/aniruddha.ca" />
+<meta property="article:tag" content="cpp" />
+<meta property="article:tag" content="ctype" />
+<meta property="article:tag" content="Python" />
+<meta property="article:section" content="Python" />
+<meta property="article:published_time" content="2017-08-05T13:13:46+00:00" />
+<meta property="article:modified_time" content="2019-03-16T12:12:13+00:00" />
+<meta property="og:updated_time" content="2019-03-16T12:12:13+00:00" />
+<meta property="og:image" content="https://www.csestack.org/wp-content/uploads/2018/04/CSEstack_social_icon.png" />
+<meta property="og:image:secure_url" content="https://www.csestack.org/wp-content/uploads/2018/04/CSEstack_social_icon.png" />
+<meta property="og:image:width" content="200" />
+<meta property="og:image:height" content="200" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:description" content="How to use ctype module for calling c functions from python? Commands for generating shared object file." />
+<meta name="twitter:title" content="Calling C Functions from Python [Step by Step Procedure]" />
+<meta name="twitter:site" content="@ani_chaudhari" />
+<meta name="twitter:image" content="https://www.csestack.org/wp-content/uploads/2018/04/CSEstack_social_icon.png" />
+<meta name="twitter:creator" content="@ani_chaudhari" />
+<script type='application/ld+json' class='yoast-schema-graph yoast-schema-graph--main'>{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.csestack.org/#website","url":"https://www.csestack.org/","name":"CSEstack","publisher":{"@id":"https://www.csestack.org/#person"},"potentialAction":{"@type":"SearchAction","target":"https://www.csestack.org/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://www.csestack.org/calling-c-functions-from-python/#webpage","url":"https://www.csestack.org/calling-c-functions-from-python/","inLanguage":"en-US","name":"Calling C Functions from Python [Step by Step Procedure]","isPartOf":{"@id":"https://www.csestack.org/#website"},"datePublished":"2017-08-05T13:13:46+00:00","dateModified":"2019-03-16T12:12:13+00:00","description":"How to use ctype module for calling c functions from python? Commands for generating shared object file."},{"@type":"Article","@id":"https://www.csestack.org/calling-c-functions-from-python/#article","isPartOf":{"@id":"https://www.csestack.org/calling-c-functions-from-python/#webpage"},"author":{"@id":"https://www.csestack.org/author/anicse/#author"},"headline":"Calling C Functions from Python [Step by Step Procedure]","datePublished":"2017-08-05T13:13:46+00:00","dateModified":"2019-03-16T12:12:13+00:00","commentCount":"6","mainEntityOfPage":"https://www.csestack.org/calling-c-functions-from-python/#webpage","publisher":{"@id":"https://www.csestack.org/#person"},"keywords":"cpp,ctype,Python","articleSection":"C / C++,Code,Python"},{"@type":["Person"],"@id":"https://www.csestack.org/author/anicse/#author","name":"Aniruddha Chaudhari","image":{"@type":"ImageObject","@id":"https://www.csestack.org/#authorlogo","url":"https://secure.gravatar.com/avatar/c7502f93fff86dd4d2375f271bf9e732?s=96&d=mm&r=g","caption":"Aniruddha Chaudhari"},"description":"I am complete Python Nut, love Linux and vim as an editor. I hold Master of Computer Science from NIT Trichy. I dabble in C/C++, Java too. I keep sharing my coding knowledge and my own experience on <a href=\"https://www.csestack.org\">CSEstack Portal</a>.","sameAs":["https://www.facebook.com/aniruddha.ca","https://twitter.com/ani_chaudhari"]}]}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//clientcdn.pushengage.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="CSEstack &raquo; Feed" href="https://www.csestack.org/feed/" />
+<link rel="alternate" type="application/rss+xml" title="CSEstack &raquo; Comments Feed" href="https://www.csestack.org/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="CSEstack &raquo; Calling C Functions from Python [Step by Step Procedure] Comments Feed" href="https://www.csestack.org/calling-c-functions-from-python/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.csestack.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.2.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://www.csestack.org/wp-includes/css/dist/block-library/style.min.css?ver=5.2.1' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://www.csestack.org/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.1.3' type='text/css' media='all' />
+<link rel='stylesheet' id='ez-icomoon-css'  href='https://www.csestack.org/wp-content/plugins/easy-table-of-contents/vendor/icomoon/style.min.css?ver=1.7' type='text/css' media='all' />
+<link rel='stylesheet' id='ez-toc-css'  href='https://www.csestack.org/wp-content/plugins/easy-table-of-contents/assets/css/screen.min.css?ver=1.7' type='text/css' media='all' />
+<style id='ez-toc-inline-css' type='text/css'>
+div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 400;}div#ez-toc-container ul li {font-size: 100%;}
+</style>
+<link rel='stylesheet' id='newsletter-css'  href='https://www.csestack.org/wp-content/plugins/newsletter/style.css?ver=6.0.5' type='text/css' media='all' />
+<link rel='stylesheet' id='fenomen-reset-css'  href='https://www.csestack.org/wp-content/themes/fenomen/engine/assets/css/reset.css' type='text/css' media='all' />
+<link rel='stylesheet' id='animate-css-css'  href='https://www.csestack.org/wp-content/themes/fenomen/includes/assets/css/animate.css' type='text/css' media='all' />
+<link rel='stylesheet' id='magnific-popup-css'  href='https://www.csestack.org/wp-content/themes/fenomen/includes/magnific-popup/css/magnific-popup.css' type='text/css' media='all' />
+<link rel='stylesheet' id='owl-carousel-css'  href='https://www.csestack.org/wp-content/themes/fenomen/includes/owl.carousel/css/owl.carousel.css' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css'  href='https://www.csestack.org/wp-content/plugins/js_composer/assets/lib/bower/font-awesome/css/font-awesome.min.css?ver=4.12.1' type='text/css' media='all' />
+<link rel='stylesheet' id='fenomen-styles-css'  href='https://www.csestack.org/wp-content/themes/fenomen/engine/assets/css/styles.css?ver=2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='fenomen-widgets-css'  href='https://www.csestack.org/wp-content/themes/fenomen/engine/assets/css/widgets.css?ver=2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='fenomen-shortcodes-css'  href='https://www.csestack.org/wp-content/themes/fenomen/engine/assets/css/shortcodes.css?ver=all' type='text/css' media='all' />
+<link rel='stylesheet' id='js_composer_front-css'  href='https://www.csestack.org/wp-content/plugins/js_composer/assets/css/js_composer.min.css?ver=4.12.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.csestack.org/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/themes/fenomen/includes/owl.carousel/js/owl.carousel.js?ver=1.11.3'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/themes/fenomen/engine/assets/js/fm.func.js?ver=2.4'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/themes/fenomen/includes/assets/js/imagesloaded.pkgd.js?ver=4.1.0'></script>
+<link rel='https://api.w.org/' href='https://www.csestack.org/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.csestack.org/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.csestack.org/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.2.1" />
+<link rel='shortlink' href='https://www.csestack.org/?p=2761' />
+<link rel="alternate" type="application/json+oembed" href="https://www.csestack.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.csestack.org%2Fcalling-c-functions-from-python%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.csestack.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.csestack.org%2Fcalling-c-functions-from-python%2F&#038;format=xml" />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43451538-2', 'auto');
+  ga('send', 'pageview');
+
+</script>		<script type="text/javascript">
+			var _statcounter = _statcounter || [];
+			_statcounter.push({"tags": {"author": "Aniruddha"}});
+		</script>
+		<script> window._peq = window._peq || []; window._peq.push(['init']); </script><meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://www.csestack.org/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><!--[if IE  8]><link rel="stylesheet" type="text/css" href="https://www.csestack.org/wp-content/plugins/js_composer/assets/css/vc-ie8.min.css" media="screen"><![endif]--><style type="text/css" id="syntaxhighlighteranchor"></style>
+<link rel="icon" href="https://www.csestack.org/wp-content/uploads/2017/12/cropped-site_icon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.csestack.org/wp-content/uploads/2017/12/cropped-site_icon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://www.csestack.org/wp-content/uploads/2017/12/cropped-site_icon-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.csestack.org/wp-content/uploads/2017/12/cropped-site_icon-270x270.png" />
+
+<style type="text/css">
+
+
+/* ================================== *
+ **
+  ** BASE
+ **
+ * ================================== */
+
+
+body { 
+    font-family: ''Arial Black', Gadget, sans-serif';
+           background-color: #eaeaea;
+        }
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: ''Arial Black', Gadget, sans-serif';
+}
+
+::-moz-selection {
+    background-color: #ea3f06;
+}
+
+::selection {
+    background-color: #ea3f06;
+}
+
+
+a:hover,
+.header-style-classic .main-menu > ul > li.current-menu-item > a,.header-style-classic .main-menu > ul > li:hover > a,
+.header-social-icons a:hover,
+.post-filter-styles blockquote:before,
+.post-filter-styles blockquote:after,
+.single-post-author .author-info .author-social-icons a,
+.fm-layout-item:hover .fm-post-hover-title a,
+.owl-custom-nav a:before,
+.owl-custom-nav a:after,
+#wp-calendar tbody td a,
+.sidebar .widget-box > ul > li:hover > a,
+.sidebar .widget-box li:hover:before,
+.footer-widgets .widget-box > ul > li:hover > a,
+.footer-widgets .widget-box li:hover:before
+{
+    color: #ea3f06;
+}
+
+#commentform input.comment-submit-button,
+.fm-box-title:before,
+.fm-cat-list a,
+.fm-tag-list a:hover,
+.gpag-type-dots .owl-dots .owl-dot span,
+.owl-slider-nav a:before,
+.owl-slider-nav a:after,
+.single-post-cat-list a,
+.single-post-related-post:nth-child(2n) .single-post-related-post-cat-list a,
+.posts-grid-wg-item:nth-child(4n-1) .posts-grid-wg-featured-post-cat-list a,.posts-grid-wg-item:nth-child(4n-2) .posts-grid-wg-featured-post-cat-list a,
+.dot1,.dot2,
+.fm-gallery .loop i,
+.double-bounce1,.double-bounce2,
+.multi6-box-item-even:hover .multi6-post-cat-list a,
+.multi5-box-item-even:hover .multi5-post-cat-list a,
+.multi3-box-item-even:hover .multi3-post-cat-list a,
+.widget_tag_cloud .tagcloud a:nth-child(2n),
+.widget_product_tag_cloud .tagcloud a:nth-child(2n),
+#wp-calendar tbody td:hover
+{
+    background-color: #ea3f06;
+}
+
+
+.pagin-type-classic a:hover,
+.pagin-pages .current,
+.owl-prev:hover:before,.owl-next:hover:before,
+.tab-headers li.current-header-tab span
+{
+    background-color: #ea3f06;
+    border-color: #ea3f06;
+} 
+ 
+input[type="submit"],
+button,
+.pagin-type-more .pagination-loadmore
+{
+    border-color: #ea3f06;
+} 
+
+
+
+@media screen and (min-width: 1024px) {
+    .main-menu > ul > li > ul > li:hover > a:before,
+    .main-menu ul ul li > ul > li:hover > a:before {
+        background-color: #ea3f06;   
+    }
+    .main-menu ul ul > li:hover > a {
+        color: #ea3f06;    
+    }
+}
+
+
+@media screen and (max-width: 1023px) {
+    #main-menu ul li a:hover {
+        color: #fff;
+        background-color: #ea3f06;   
+    }
+
+    .main-menu-close-button:hover {
+        background-color: #ea3f06;   
+        border-color: #ea3f06;   
+    }    
+}
+
+@media screen and (max-width: 767px) {
+    .tab-headers-mobile-button-active:after,
+    .tab-headers-mobile-button:hover:after,
+    .tab-headers li span:hover,
+    .tab-headers li.current-header-tab span,
+    .tab-headers li.holder-header-tab span {
+        color: #ea3f06; 
+    }
+
+    .tab-headers li.current-header-tab span
+    {
+        background-color: transparent;
+        border-color: transparent;
+    } 
+}
+
+
+
+ 
+
+
+
+
+</style><style type="text/css">/*******Basic Text Decoration************/
+
+body {
+    font-size: 17px;
+}
+
+.post-filter-styles h4 {
+   line-height: 1.7;
+   font-size: 19px;
+   color: #ea3f06;
+}
+
+.post-filter-styles h3 {
+    line-height: 1.7;
+    font-size: 21px;
+    color: #ea3f06;
+}
+
+.post-filter-styles h2 {
+   line-height: 1.7;
+   font-size: 28px;
+   color: #ea3f06;
+    
+}
+
+.post-filter-styles h1 {
+    line-height: 1.7;
+    font-size: 32px;
+    color: #ea3f06;
+}
+
+
+.single-post-title {
+    font-size: 32px;
+    line-height: 1.7;
+}
+
+.post-filter-styles ol {
+    list-style-position: outside;
+    padding: 0 0 0 20px;
+}
+
+.post-filter-styles ul {
+    list-style-position: outside;
+    padding: 0 0 0 20px;
+}
+
+.post-filter-styles li {
+    margin: 20px 0;
+}
+
+p + p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.fm-layout-item {
+    margin-bottom: 20px;
+}
+
+.single-post-content-area img, .single-page-content img {
+    box-shadow: 5px 5px 15px 5px grey;
+}
+
+
+h3.single-post-related-post-title {
+    font-size: 15px;
+}
+
+
+/*******Post Content #Links - Table_Of_Content (TOC) ************/
+.post_container_links, .toc {
+    background: #f9f9f9;
+    border: 1px solid #aaa;
+    padding: 10px;
+    margin: 1em;
+    width: auto;
+}
+
+
+.post_container_links ul ul, .toc ul ul {
+    list-style-type: disc;
+    list-style-position: outside;
+    margin-left: auto;
+}
+.post_container_links li, .toc li {
+    margin: 5px;
+}
+
+/*******Link Decoration************/
+a {
+    color: #2075bf;
+    font-weight: bold;
+}
+
+.single-post-tag-list a, #footer a{
+    color: white;
+}
+
+.fm-layout-item a {
+    color: #2075bf;
+}
+
+.author-desc a {
+    font-weight:normal;
+}
+
+/******************/
+
+.fm-box-title {
+    text-transform: none;
+}
+
+
+input[type='checkbox'] {
+      	-webkit-appearance: checkbox;
+      	-moz-appearance:checkbox;
+}
+
+
+code {
+    background: #EFF0F1;
+    padding: 1px 5px;
+}
+
+pre, samp {
+    border: 1px solid #ededed;
+    line-height: 1.514285714;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    overflow: auto;
+    padding: 10px;
+    background-color: #ebebeb;
+    white-space: pre-wrap;
+}
+
+.submit-button {
+    color: #fff;
+    font-size: 16px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px 2px grey;
+    background-color: #ea3f06;
+}
+
+.submit-button:hover {
+    color: #000;
+}
+
+/*******Table in post************/
+.posttable {
+    margin: 1em 0;
+}
+
+.posttable th {
+    background-color: #0274be;
+    color: white;
+}
+
+
+.posttable td, th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 4px;
+}
+
+
+/********Online Tools*********/
+
+.toolBox table {
+    border-collapse: collapse;
+    border: 0px;
+    background-color: gainsboro;
+    color: black;
+    padding: 20px;
+}
+
+table {
+    overflow: auto;
+    display: block;
+}
+
+.toolBox th, .toolBox td {
+    padding: 5px 5px 0px 5px;
+    text-align: left;
+    border: 0px;
+    vertical-align: middle;
+}
+
+
+/*********Custom Google Search*************/
+
+input[name="q"] {
+    width: 70%;
+    height: 30px;
+    margin: 2px;
+}
+
+
+input[type="submit"] {
+    background: #ea3f06;
+    font-size: inherit;
+    text-transform: inherit;
+    border-top: none;
+    box-shadow: 5px 5px 15px 2px grey;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover {
+    color: #000;
+}
+
+
+/**********************/
+
+.tnp-subscription {
+    background-color: lightgrey;
+    padding: 10px;
+}
+
+.tnp-subscription input[type=email] {
+    height: inherit;
+}
+
+
+/*********Tutorial Navigation Links****************/
+
+.tutorialnav .next {
+    float: right;
+}
+
+/**************************************************/
+/*recent post Home page*/
+.widgettitle {
+    display: none;
+}
+/*****home page icon*****/
+img.vc_single_image-img.attachment-thumbnail {
+    box-shadow: none;
+}
+
+/**********Post Share button ********************/
+.single-post-share-incontent-top {
+    padding-top: 0;
+    border-top: none;
+}
+
+/**********Tutorial links in Sidebar ********************/
+.tutor-list a {
+    border-bottom: 1px solid rgb(238, 238, 238);
+    display: block;
+}
+
+.tutor-list a.current {
+    color: #ea3f06;
+}
+
+/**add arrow**/
+.tutor-list .current:after {
+    content:'\25BA';
+    float:right;
+}
+
+.tutor-list p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tutor-list ol {
+    list-style-type: decimal;
+    padding: 0 0 0 28px;
+}
+/**Disable date on archive post snipet**/
+.left-list-post-meta-right {
+    display: none;
+}
+
+/***Used in bin hex dec oct conversion tool***/
+sub {
+    vertical-align: sub;
+    font-size: smaller;
+}</style>
+
+<noscript><style type="text/css"> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>  
+    </head> 
+    <body class="post-template-default single single-post postid-2761 single-format-standard wpb-js-composer js-comp-ver-4.12.1 vc_responsive">
+                <div id="wrapper" class="post-thumbnail-preloaders-active wrapper-boxed">
+            <div id="header" class="header-layout-1 header-style-menu-skin-dark clearfix">
+                                <div class="header-row-parent header-row-1 clearfix">
+                    <div class="header-row-wrapper">
+                        <div class="header-row-1-container clearfix">
+                            <div class="header-align-left">
+                                <nav class="header-row-element" id="header-second-menu"><div class="header-second-menu"><ul class="second-menu-list"><li id="menu-item-144" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-144"><a href="https://www.csestack.org/">Home</a></li>
+<li id="menu-item-146" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146"><a href="http://csestack.org/subscribe/">Subscribe</a></li>
+<li id="menu-item-153" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-153"><a href="https://www.csestack.org/write-for-us/">Contribute Us</a>
+<ul class="sub-menu">
+	<li id="menu-item-887" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-887"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeCMS1m5gDIHuc8TrcPteiEcT8_bhf1EFvDVwiN9Wu06c_Hlw/viewform?c=0&#038;w=1">Share Your Interview Experience</a></li>
+</ul>
+</li>
+<li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152"><a href="https://www.csestack.org/contact-us/">Contact Us</a></li>
+<li id="menu-item-53" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-53"><a href="https://www.csestack.org/about/">About</a>
+<ul class="sub-menu">
+	<li id="menu-item-886" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-886"><a href="https://www.csestack.org/about/">About CSEstack</a></li>
+	<li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="http://www.csestack.org/campus-ambassador-program-csestack/">Campus Ambassador</a></li>
+</ul>
+</li>
+<li id="menu-item-381" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-381"><a href="https://www.facebook.com/groups/csestack/">Forum &#038; Discus</a></li>
+<li id="menu-item-468" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-468"><a href="http://www.csestack.org/decimal-binary-hexadecimal-octal-converter/">Tools for Geek</a></li>
+<li id="menu-item-1075" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1075"><a href="https://www.csestack.org/lb/">LeaderBoard</a></li>
+</ul></div></nav>                            </div>
+                            <div class="header-align-right">
+                                <div class="header-row-element header-social-icons"><a target="_blank" href="https://www.facebook.com/CSEStack/" class="icon-facebook"><i class="fa fa-facebook"></i></a><a target="_blank" href="https://www.linkedin.com/in/aniruddha28/" class="icon-linkedin"><i class="fa fa-linkedin"></i></a><a target="_blank" href="https://twitter.com/csestack" class="icon-twitter"><i class="fa fa-twitter"></i></a></div>                            </div>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="header-row-parent header-row-2 clearfix">
+                    <div class="header-row-wrapper">
+                        <div class="header-row-2-container clearfix">
+                            <div class="header-row-element header-logo"><div class="header-logo-wrapper"><a href="https://www.csestack.org/"><img src="https://www.csestack.org/wp-content/uploads/2017/12/CSEstack-portal-logo.png" data-at2x="https://www.csestack.org/wp-content/uploads/2017/12/CSEstack-portal-logo-ratina.png" width="376" height="94" alt="CSEstack"></a></div></div> 
+                            <div class="header-row-element header-advert"><div style="background-color: lightgray; padding: 5px;">
+<p style="font-size: 20px; text-align: center">What do you want to Learn Today?</p>
+<form action="http://www.csestack.org/custom-google-search-result-csestack/" id="cse-search-box">
+  <div align="center">
+    <input type="hidden" name="cx" value="partner-pub-7377419723915904:9718426834" />
+    <input type="hidden" name="cof" value="FORID:10" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+</div>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+
+</div>                        </div>
+                    </div>
+                </div>
+                                <div class="header-row-parent header-row-3 clearfix">
+                    <div class="header-row-wrapper">
+                        <div class="header-row-3-container header-menu-skin-dark header-style-boxed clearfix">
+                            <div class="header-align-left">
+                                <nav class="header-row-element main-menu-boxed" id="main-menu"><a class="main-menu-button"></a><div class="main-menu-wrapper"><div class="main-menu-close clearfix"><span class="main-menu-close-button"></span></div><div class="main-menu menu-separator"><ul class="main-menu-list"><li id="menu-item-1388" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-1388"><a href="https://www.csestack.org/category/code/">Programming</a>
+<ul class="sub-menu">
+	<li id="menu-item-2123" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2123"><a href="https://www.csestack.org/c-cpp/">C/C++</a></li>
+	<li id="menu-item-2093" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2093"><a href="https://www.csestack.org/python/">Python</a></li>
+	<li id="menu-item-3270" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3270"><a href="https://www.csestack.org/java/">Java</a></li>
+	<li id="menu-item-3880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3880"><a href="https://www.csestack.org/html-program-examples-output/">HTML &#038; CSS</a></li>
+	<li id="menu-item-1392" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1392"><a href="https://www.csestack.org/category/code/sql/">SQL</a></li>
+</ul>
+</li>
+<li id="menu-item-1393" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1393"><a href="https://www.csestack.org/category/cse-subject/">CSE Subject</a>
+<ul class="sub-menu">
+	<li id="menu-item-1394" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1394"><a href="https://www.csestack.org/category/cse-subject/compiler-design/">Compiler Design</a></li>
+	<li id="menu-item-1396" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1396"><a href="https://www.csestack.org/category/cse-subject/computer-network/">Computer Network</a></li>
+	<li id="menu-item-1397" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1397"><a href="https://www.csestack.org/category/cse-subject/computer-organisation-and-architecture/">COA</a></li>
+	<li id="menu-item-1398" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1398"><a href="https://www.csestack.org/category/cse-subject/data-structure/">Data Structure</a></li>
+	<li id="menu-item-1399" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1399"><a href="https://www.csestack.org/category/cse-subject/dbms/">DBMS</a></li>
+	<li id="menu-item-1400" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1400"><a href="https://www.csestack.org/category/cse-subject/operating-system/">Operating System</a></li>
+	<li id="menu-item-1401" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1401"><a href="https://www.csestack.org/category/cse-subject/theory-of-automata/">Theory of Automata</a></li>
+	<li id="menu-item-1402" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1402"><a href="https://www.csestack.org/category/cse-subject/web-technology/">Web Technology</a></li>
+</ul>
+</li>
+<li id="menu-item-3469" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3469"><a href="https://www.csestack.org/category/linux/">Linux</a></li>
+<li id="menu-item-1441" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1441"><a href="#">Trend</a>
+<ul class="sub-menu">
+	<li id="menu-item-1670" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1670"><a href="https://www.csestack.org/category/artificial-intelligence/">Artificial Intelligence (AI)</a></li>
+	<li id="menu-item-1387" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1387"><a href="https://www.csestack.org/category/big-data/">Big Data</a></li>
+	<li id="menu-item-1669" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1669"><a href="https://www.csestack.org/category/cloud-computing/">Cloud Computing</a></li>
+	<li id="menu-item-1412" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1412"><a href="https://www.csestack.org/category/machine-learning/">Machine Learning (ML)</a></li>
+</ul>
+</li>
+<li id="menu-item-5291" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-5291"><a href="https://www.csestack.org/gate/">GATE 2020</a></li>
+<li id="menu-item-1442" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1442"><a href="#">Career</a>
+<ul class="sub-menu">
+	<li id="menu-item-1414" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1414"><a href="https://www.csestack.org/category/placement-interview/">Placement Interview</a></li>
+	<li id="menu-item-1411" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1411"><a href="https://www.csestack.org/category/jobs/">Jobs</a></li>
+	<li id="menu-item-1386" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1386"><a href="https://www.csestack.org/category/aptitude/">Aptitude</a></li>
+	<li id="menu-item-1415" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1415"><a href="https://www.csestack.org/category/quiz/">Quiz</a></li>
+</ul>
+</li>
+<li id="menu-item-1443" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1443"><a href="#">Material</a>
+<ul class="sub-menu">
+	<li id="menu-item-1416" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1416"><a href="https://www.csestack.org/category/recommended-books/">Recommended Books</a></li>
+	<li id="menu-item-1417" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1417"><a href="https://www.csestack.org/category/software-and-installation-guide/">Software Installation</a></li>
+</ul>
+</li>
+<li id="menu-item-1492" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1492"><a href="https://www.csestack.org/write-for-us/">Write for Us</a>
+<ul class="sub-menu">
+	<li id="menu-item-1495" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1495"><a href="https://www.csestack.org/write-for-us/">Write for Us</a></li>
+	<li id="menu-item-1493" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1493"><a href="http://www.csestack.org/submit-source-code-program/">Submit Source Code or Program</a></li>
+	<li id="menu-item-1494" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1494"><a href="https://goo.gl/nharb8">Share Interview Experience</a></li>
+</ul>
+</li>
+<li id="menu-item-1837" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1837"><a href="http://www.csestack.org/decimal-binary-hexadecimal-octal-converter/">Tools</a></li>
+</ul></div></div></nav>                            </div>
+                            <div class="header-align-right">
+                                <div class="header-row-element header-search"><form action="https://www.csestack.org/" id="header-search-form" class="header-search-open" method="get" name="searchform"><div class="s-box"><div class="s-box-content"><input class="s-input" id="s" name="s" placeholder="Type the text..." type="text" value=""><input class="s-submit" type="submit" value=""></div></div><div class="s-icon" id="s-icon"><i class="fa fa-search"></i></div></form></div>                            </div>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+            <!-- header -->    <div class="container sidebar-left clearfix">  
+           
+        <div class="container-wrapper clearfix">
+                    <div class="single-post-featured-image clearfix"></div>  
+          
+        <div class="container-inner">
+            <div id="content">
+                <div class="content-wrapper clearfix">
+                    
+
+                        <div class="single-post-inner">
+                        <div id="single-post-main-area" class="single-post-boxes single-post-main-area clearfix"><div class="single-post-post-area clearfix"><div class="single-post-content-area"><div class="single-post-content-area-wrapper"><h1 class="single-post-title">Calling C Functions from Python [Step by Step Procedure]</h1><div class="single-post-main-meta clearfix"><div class="fm-post-meta single-post-meta-data"><span class="fm-meta-data fm-meta-icons single-post-author-link"><a href="https://www.csestack.org/author/anicse/"><i class="fa fa-user"></i>Aniruddha Chaudhari</a></span><span class="slash">/</span><span class="fm-meta-data fm-meta-icons"><i class="fa fa-eye"></i>17544</span><span class="slash">/</span><span class="fm-meta-data fm-meta-icons"><i class="fa fa-comments"></i>6</span></div><div class="fm-cat-list single-post-cat-list"><div class="fm-cat-list-content"><a class="single-post-cat-link" href="https://www.csestack.org/category/code/c-cpp/">C / C++</a><a class="single-post-cat-link" href="https://www.csestack.org/category/code/">Code</a><a class="single-post-cat-link" href="https://www.csestack.org/category/code/python/">Python</a></div></div></div><div class="single-post-share-incontent single-post-share-incontent-top clearfix"><div class="single-post-share-icons single-post-element clearfix"><div class="single-post-share-icons-wrapper"><a target="_blank" href="http://www.facebook.com/sharer.php?u=https://www.csestack.org/calling-c-functions-from-python/&#038;t=Calling+C+Functions+from+Python+%5BStep+by+Step+Procedure%5D" class="icon-facebook"><i class="fa fa-facebook"></i></a><a target="_blank" href="http://twitter.com/home/?status=Calling+C+Functions+from+Python+%5BStep+by+Step+Procedure%5D+-+https://www.csestack.org/calling-c-functions-from-python/" class="icon-twitter"><i class="fa fa-twitter"></i></a><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&#038;title=Calling+C+Functions+from+Python+%5BStep+by+Step+Procedure%5D&#038;url=https://www.csestack.org/calling-c-functions-from-python/" class="icon-linkedin"><i class="fa fa-linkedin"></i></a><a target="_blank" href="http://www.reddit.com/submit?url=https://www.csestack.org/calling-c-functions-from-python/&#038;title=Calling%20C%20Functions%20from%20Python%20%5BStep%20by%20Step%20Procedure%5D" class="icon-reddit"><i class="fa fa-reddit"></i></a></div></div></div><div class="single-post-content post-filter-styles">
+<!-- WP QUADS Content Ad Plugin v. 1.8.5 -->
+<div class="quads-location quads-ad1" id="quads-ad1" style="float:none;margin:0px;">
+
+ <!-- WP QUADS - Quick AdSense Reloaded v.1.8.5 Content AdSense async --> 
+
+<script async data-cfasync="false" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script type="text/javascript" data-cfasync="false">
+var quads_screen_width = document.body.clientWidth;
+if ( quads_screen_width >= 1140 ) {
+/* desktop monitors */
+document.write('<ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7377419723915904" data-ad-slot="7431066039" ></ins>');
+(adsbygoogle = window.adsbygoogle || []).push({});
+}if ( quads_screen_width >= 1024  && quads_screen_width < 1140 ) {
+/* tablet landscape */
+document.write('<ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7377419723915904" data-ad-slot="7431066039" ></ins>');
+(adsbygoogle = window.adsbygoogle || []).push({});
+}if ( quads_screen_width >= 768  && quads_screen_width < 1024 ) {
+/* tablet portrait */
+document.write('<ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7377419723915904" data-ad-slot="7431066039" ></ins>');
+(adsbygoogle = window.adsbygoogle || []).push({});
+}if ( quads_screen_width < 768 ) {
+/* phone */
+document.write('<ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-7377419723915904" data-ad-slot="7431066039" ></ins>');
+(adsbygoogle = window.adsbygoogle || []).push({});
+}</script>
+
+ <!-- end WP QUADS --> 
+
+
+</div>
+<p>Here, in this tutorial, I am going to tutor you a simple Python wrapper for C library. And how to call C functions from Python?</p>
+<p>Before beginning this, let&#8217;s see&#8230;</p>
+<h3>Why do we need of Calling C Functions from Python?</h3>
+<p>Till now I have talked about many plus points about Python.</p>
+<p>But&#8230;</p>
+<p>There is One of the major disadvantages of the Python &#8211; its execution speed. 🙁  <strong>Python is slower</strong> than many of the competitive programming language like C, Java&#8230;</p>
+<p>C and CPP is a very standard programming language. And there are so many libraries already available in C.</p>
+<p>To enhance the speed of the Python and to make the reuse of existing C libraries, the concept of calling C functions from Python is useful.</p>
+<p><strong>So there are two advantages of using C libraries (or C functions):</strong></p>
+<ul>
+<li>As the library is compiled from C programming, it increases the spread of execution. (C program runs faster than Python program.)</li>
+<li>There are many C libraries are already build. Reusing existing C libraries saves time and resource.</li>
+</ul>
+<p>In fact, there are many Python inbuilt standard libraries are written in C. You may not have noticed it, but many times when you call inbuilt function, it executes C function internally.</p>
+<p>So coming to our coding part&#8230;</p>
+<p><strong>How to create these C libraries?</strong></p>
+<p>In this tutorial, I am going to tell you, how to compile C program to create library and step by step procedure for calling C functions from Python code.</p>
+<h2>Creating C library and Calling C Functions from Python:</h2>
+<p>Steps&#8230;</p>
+<ol>
+<li>Write a C program with function definition</li>
+<li>Write a C program header file with all function declaration</li>
+<li>Create C library that can be used in Python</li>
+<li>Calling C functions from Python program</li>
+</ol>
+<p>To understand this tutorial, we will create an arithmetic application where all the arithmetic definition are written in C. And we will write a wrapper using Python called <code>calci</code>that will call the function written in C program.</p>
+<p>Let&#8217;s begin&#8230;</p>
+<h3>Step 1: Write a C program with functions definition</h3>
+<p>First of all, write a simple C program with functions definition.</p>
+<p>Even if you know the <a href="http://www.csestack.org/c-cpp/">basic of C and C++ programming</a>, you can write the function in C that performs the basic arithmetic operations.</p>
+<p>Following is code in C.</p>
+<pre class="brush: cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "arithmatic.h"
+
+void connect()
+{
+	printf("Connected to C extension...\n");
+}
+
+//return random value in range of 0-50
+int randNum()
+{
+        int nRand = rand() % 50; 
+	return nRand;
+}
+
+//add two number and return value
+int addNum(int a, int b)
+{
+	int nAdd = a + b;
+	return nAdd;
+}
+
+</pre>
+<p><strong>Note:</strong> There is no function <code>main()</code> in above program. There are only function definitions that we are going to call them from Python program.</p>
+<p>Save above program as <code>arithmatic.c</code>.</p>
+<h3>Step 2: Write a C Program Header File with all Function Declaration</h3>
+<p>We may have noticed in above C program as we have included header file as <code>arithmatic.h</code>.</p>
+<pre class="brush: cpp">void connect();
+int randNum();
+int addNum(int a, int b);
+</pre>
+<p>This header file contains declarations of all the arithmetic functions.</p>
+<p>Save the file as aithmatic.h. in the same directory.</p>
+<h3>Step 3: Create C library that can be used in Python</h3>
+<p>You need gcc compiler to compile C program.</p>
+<p>To use that C function in Python you need to compile and generate the shared object.</p>
+<!-- WP QUADS Content Ad Plugin v. 1.8.5 -->
+<div class="quads-location quads-ad2" id="quads-ad2" style="float:none;margin:20px 0 20px 0;text-align:center;">
+
+ <!-- WP QUADS - Quick AdSense Reloaded v.1.8.5 Content AdSense async --> 
+
+<script async data-cfasync="false" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script type="text/javascript" data-cfasync="false">
+var quads_screen_width = document.body.clientWidth;
+if ( quads_screen_width >= 1140 ) {
+/* desktop monitors */
+document.write('<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px;" data-ad-client="pub-7377419723915904" data-ad-slot="8085370837" ></ins>');
+(adsbygoogle = window.adsbygoogle || []).push({});
+}if ( quads_screen_width >= 1024  && quads_screen_width < 1140 ) {
+/* tablet landscape */
+document.write('<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px;" data-ad-client="pub-7377419723915904" data-ad-slot="8085370837" ></ins>');
+(adsbygoogle = window.adsbygoogle || []).push({});
+}if ( quads_screen_width >= 768  && quads_screen_width < 1024 ) {
+/* tablet portrait */
+document.write('<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px;" data-ad-client="pub-7377419723915904" data-ad-slot="8085370837" ></ins>');
+(adsbygoogle = window.adsbygoogle || []).push({});
+}if ( quads_screen_width < 768 ) {
+/* phone */
+document.write('<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px;" data-ad-client="pub-7377419723915904" data-ad-slot="8085370837" ></ins>');
+(adsbygoogle = window.adsbygoogle || []).push({});
+}</script>
+
+ <!-- end WP QUADS --> 
+
+
+</div>
+
+<p><strong>Now Compile C program Using gcc Compiler:</strong></p>
+<pre>gcc -c -fPIC arithmatic.c -o arithmatic.o</pre>
+<p>It will generate <code>.o</code> file. Run below command to get shared object <code>.so</code> file from <code>.o</code>.</p>
+<pre>gcc hello.o -shared -o libcalci.so</pre>
+<p>It will create the file <code>libcalci.so</code>.</p>
+<p><strong>Another way using the Single Command:</strong></p>
+<p>We are only interested in file <code>.so</code> (shared object). So, we can skip creating <code>.o</code> file.</p>
+<p>You can merge above two commands into one, that will give you shared object without getting <code>.o</code> object file.</p>
+<pre>gcc -shared -o libcalci.so -fPIC arithmatic.c</pre>
+<p>After running this command you see th file libcalci.so is generated in current directory.</p>
+<p>Backend C library (<code>libcalci.so</code>) is ready to use. We can import it into our Python program to use it.</p>
+<p><strong>Note:</strong> You need to generate shared object <code>.so</code> file for Linux, OS X, etc. For the Window OS,  you need to generate <code>.dll</code> file.</p>
+<h3>Step 4: Calling C Functions from Python Program</h3>
+<p>As like Python programming, writing wrapper is easier than it sounds.</p>
+<p>To call C functions from Python wrapper, you need to import <code>ctypes</code> foreign function library in Python code.</p>
+<p>(You can read more about this library on <a href="https://docs.python.org/2/library/ctypes.html" target="_blank" rel="noopener">Python official document</a>.)</p>
+<p>Load .so file that we have created in the previous step by creating an instance of CDLL. Just call to its constructor function CDLL(). It returns object variable (says libCalc).</p>
+<p>Now, with this object variable, you can call and pass input parameters to C functions just like calling normal Python class functions.</p>
+<p>Here is simple code&#8230;</p>
+<pre class="brush: python">from ctypes import *
+libCalc = CDLL("./libcalci.so")
+
+#call C function to check connection
+libCalc.connect() 
+
+#calling randNum() C function
+#it returns random number
+varRand = libCalc.randNum()
+print "Random Number:", varRand, type(varRand)
+
+#calling addNum() C function
+#it returns addition of two numbers
+varAdd = libCalc.addNum(20,30)
+print "Addition : ", varAdd</pre>
+<p><strong>Output:</strong></p>
+<pre>Connected to C extension...
+Random Number: 27 &lt;type 'int'&gt;
+Addition: 50</pre>
+<p>In the program, we used <a href="http://www.csestack.org/program-python-check-type-variable-float-int-string-class/">function type() to identify return data type</a> of the C function&#8217;s variable.</p>
+<p>This is all about creating C library and calling C functions with Python. If you have any question or doubt, write in a comment. I do reply all comments.</p>
+<p><strong>Some points to Acknowledge:</strong></p>
+<ul>
+<li>We are using ctype native Python module to load shared library.</li>
+<li>The ctype Python module is available from 2.5 Python version. So, just ensure you have the latest version installed on your system</li>
+<li>All these commands and programs in this tutorial are run on Ubuntu Linux system. And it will work for all other systems as well.</li>
+</ul>
+<p>Before learning Python, I learned C programming. Whenever I require, many times I reuse existing C programs (those are written earlier on my system) in Python. It saves my lots of time. Even, it is the useful approach of writing your own C library and executing complex logic faster in C functions.</p>
+<p>Hope you enjoy this tutorial.</p>
+<p>If you want to be the expert Python programmer, you can follow my <a href="http://www.csestack.org/python/">complete Python tutorial for FREE</a>.</p>
+<p>Happy Programming!
+<div class="single-post-share-incontent single-post-share-incontent-bottom clearfix"><div class="single-post-share-icons single-post-element clearfix"><div class="single-post-share-icons-wrapper"><a target="_blank" href="http://www.facebook.com/sharer.php?u=https://www.csestack.org/calling-c-functions-from-python/&#038;t=Calling+C+Functions+from+Python+%5BStep+by+Step+Procedure%5D" class="icon-facebook"><i class="fa fa-facebook"></i></a><a target="_blank" href="http://twitter.com/home/?status=Calling+C+Functions+from+Python+%5BStep+by+Step+Procedure%5D+-+https://www.csestack.org/calling-c-functions-from-python/" class="icon-twitter"><i class="fa fa-twitter"></i></a><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&#038;title=Calling+C+Functions+from+Python+%5BStep+by+Step+Procedure%5D&#038;url=https://www.csestack.org/calling-c-functions-from-python/" class="icon-linkedin"><i class="fa fa-linkedin"></i></a><a target="_blank" href="http://www.reddit.com/submit?url=https://www.csestack.org/calling-c-functions-from-python/&#038;title=Calling%20C%20Functions%20from%20Python%20%5BStep%20by%20Step%20Procedure%5D" class="icon-reddit"><i class="fa fa-reddit"></i></a></div></div></div><div class="fm-tag-list single-post-tag-list"><div class="fm-tag-list-content"><a class="single-post-tag-link" href="https://www.csestack.org/tag/cpp/">cpp</a><a class="single-post-tag-link" href="https://www.csestack.org/tag/ctype/">ctype</a><a class="single-post-tag-link" href="https://www.csestack.org/tag/python/">Python</a></div></div></div></div></div></div></div><div class="single-post-boxes single-post-related-posts clearfix"><h2 class="fm-box-title"><span>Related Posts</span></h2><div class="single-post-related-posts-content clearfix"><div class="fm-layout-item single-post-related-post cols cols-1"><div class="single-post-related-post-wrapper"><div class="fm-post-thumbnail single-post-related-post-thumbnail"><a href="https://www.csestack.org/r-python-machine-learning-difference/"></a><div class="fm-cat-list single-post-related-post-cat-list"><div class="fm-cat-list-content"><a class="single-post-related-cat-link" href="https://www.csestack.org/category/big-data/">Big Data</a><a class="single-post-related-cat-link" href="https://www.csestack.org/category/code/">Code</a><a class="single-post-related-cat-link" href="https://www.csestack.org/category/code/python/">Python</a></div></div></div><div class="single-post-related-post-data"><h3 class="fm-post-title fm-post-hover-title single-post-related-post-title"><a href="https://www.csestack.org/r-python-machine-learning-difference/">R Vs Python | Best Programming Language for Machine Learning</a></h3></div></div></div><div class="fm-layout-item single-post-related-post cols cols-1"><div class="single-post-related-post-wrapper"><div class="fm-post-thumbnail single-post-related-post-thumbnail"><a href="https://www.csestack.org/python-list/"></a><div class="fm-cat-list single-post-related-post-cat-list"><div class="fm-cat-list-content"><a class="single-post-related-cat-link" href="https://www.csestack.org/category/code/">Code</a><a class="single-post-related-cat-link" href="https://www.csestack.org/category/code/python/">Python</a></div></div></div><div class="single-post-related-post-data"><h3 class="fm-post-title fm-post-hover-title single-post-related-post-title"><a href="https://www.csestack.org/python-list/">[Complete Tutorial] Python List with Programming Examples for Beginners</a></h3></div></div></div><div class="fm-layout-item single-post-related-post cols cols-1"><div class="single-post-related-post-wrapper"><div class="fm-post-thumbnail single-post-related-post-thumbnail"><a href="https://www.csestack.org/difference-between-sort-sorted-python-list-performance/"></a><div class="fm-cat-list single-post-related-post-cat-list"><div class="fm-cat-list-content"><a class="single-post-related-cat-link" href="https://www.csestack.org/category/code/">Code</a><a class="single-post-related-cat-link" href="https://www.csestack.org/category/code/python/">Python</a></div></div></div><div class="single-post-related-post-data"><h3 class="fm-post-title fm-post-hover-title single-post-related-post-title"><a href="https://www.csestack.org/difference-between-sort-sorted-python-list-performance/">Difference between Sort and Sorted in Python List by Performance</a></h3></div></div></div></div></div><div class="single-post-boxes single-post-advert clearfix"><div class="single-post-advert-content"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- CSEstack Ad Responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7377419723915904"
+     data-ad-slot="7431066039"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div class="single-post-boxes single-post-author clearfix"><div class="single-post-author-content clearfix"><div class="author-avatar"><a href="https://www.csestack.org/author/anicse/"><img alt='' src='https://secure.gravatar.com/avatar/c7502f93fff86dd4d2375f271bf9e732?s=450&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/c7502f93fff86dd4d2375f271bf9e732?s=900&#038;d=mm&#038;r=g 2x' class='avatar avatar-450 photo' height='450' width='450' /></a></div><div class="author-info"><h5 class="single-post-author-title"><a href="https://www.csestack.org/author/anicse/">Aniruddha Chaudhari</a></h5><div class="author-social-icons clearfix"><div class="author-social-icons-wrapper"><a target="_blank" href="https://www.facebook.com/aniruddha.ca" class="icon-facebook"><i class="fa fa-facebook"></i></a><a target="_blank" href="https://twitter.com/ani_chaudhari" class="icon-twitter"><i class="fa fa-twitter"></i></a><a target="_blank" href="http://www.linkedin.com/in/aniruddha28" class="icon-linkedin"><i class="fa fa-linkedin"></i></a><a target="_blank" href="https://plus.google.com/u/0/+aniruddhachaudhari" class="icon-gplus"><i class="fa fa-google-plus"></i></a></div></div><div class="author-desc">I am complete Python Nut, love Linux and vim as an editor. I hold Master of Computer Science from NIT Trichy. I dabble in C/C++, Java too. I keep sharing my coding knowledge and my own experience on <a href="https://www.csestack.org">CSEstack Portal</a>.</div></div></div></div>
+        <div id="comments" class="single-post-boxes">
+        <div class="comments-area single-post-boxes single-post-box-element clearfix" id="single-post-comments-box" >
+            <h3 class="fm-box-title comments-title">Comments</h3>  
+            
+            <div id="comments-list">
+                <ul>
+                        <li class="comment even thread-even depth-1 parent" id="comment-4326">
+        <div id="div-comment-4326" class="comment-body clearfix">
+            <div class="comment-avatar">
+                <img alt='' src='https://secure.gravatar.com/avatar/769246a66b6679bb7d672c4d7b2dceec?s=50&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/769246a66b6679bb7d672c4d7b2dceec?s=100&#038;d=mm&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' />            </div>
+            <div class="comment-info">   
+                <div class="comment-reply">
+                    <a rel='nofollow' class='comment-reply-link' href='#comment-4326' data-commentid="4326" data-postid="2761" data-belowelement="div-comment-4326" data-respondelement="respond" aria-label='Reply to Akshay'>Reply</a>                </div>    
+                <h6 class="comment-author">Akshay</h6>
+                <div class="comment-date">
+                    June 20, 2018 at 6:39 pm                </div> 
+                <div class="comment-text">
+                    <p>How to access global variable of c in python ?</p>
+                </div>   
+                            </div> 
+        </div>
+    <ul class="children">
+    <li class="comment byuser comment-author-anicse bypostauthor odd alt depth-2" id="comment-4352">
+        <div id="div-comment-4352" class="comment-body clearfix">
+            <div class="comment-avatar">
+                <img alt='' src='https://secure.gravatar.com/avatar/c7502f93fff86dd4d2375f271bf9e732?s=50&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/c7502f93fff86dd4d2375f271bf9e732?s=100&#038;d=mm&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' />            </div>
+            <div class="comment-info">   
+                <div class="comment-reply">
+                    <a rel='nofollow' class='comment-reply-link' href='#comment-4352' data-commentid="4352" data-postid="2761" data-belowelement="div-comment-4352" data-respondelement="respond" aria-label='Reply to Aniruddha Chaudhari'>Reply</a>                </div>    
+                <h6 class="comment-author">Aniruddha Chaudhari</h6>
+                <div class="comment-date">
+                    June 24, 2018 at 11:22 pm                </div> 
+                <div class="comment-text">
+                    <p>Hi Akshay, </p>
+<p>I did not try it. Will try it and will let you know.</p>
+                </div>   
+                            </div> 
+        </div>
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1 parent" id="comment-4350">
+        <div id="div-comment-4350" class="comment-body clearfix">
+            <div class="comment-avatar">
+                <img alt='' src='https://secure.gravatar.com/avatar/e417db3fc4867238afcd325f239f429c?s=50&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/e417db3fc4867238afcd325f239f429c?s=100&#038;d=mm&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' />            </div>
+            <div class="comment-info">   
+                <div class="comment-reply">
+                    <a rel='nofollow' class='comment-reply-link' href='#comment-4350' data-commentid="4350" data-postid="2761" data-belowelement="div-comment-4350" data-respondelement="respond" aria-label='Reply to Perry'>Reply</a>                </div>    
+                <h6 class="comment-author">Perry</h6>
+                <div class="comment-date">
+                    June 24, 2018 at 10:56 pm                </div> 
+                <div class="comment-text">
+                    <p>Can I call C program from python that uses wiringPi to write to an LCD 20&#215;2 through an MCP23017 chip? I am using the LCD 20&#215;2 to display the date and time and CPU temperature of a raspberry pi.</p>
+<p>Thank you</p>
+                </div>   
+                            </div> 
+        </div>
+    <ul class="children">
+    <li class="comment byuser comment-author-anicse bypostauthor odd alt depth-2" id="comment-4351">
+        <div id="div-comment-4351" class="comment-body clearfix">
+            <div class="comment-avatar">
+                <img alt='' src='https://secure.gravatar.com/avatar/c7502f93fff86dd4d2375f271bf9e732?s=50&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/c7502f93fff86dd4d2375f271bf9e732?s=100&#038;d=mm&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' />            </div>
+            <div class="comment-info">   
+                <div class="comment-reply">
+                    <a rel='nofollow' class='comment-reply-link' href='#comment-4351' data-commentid="4351" data-postid="2761" data-belowelement="div-comment-4351" data-respondelement="respond" aria-label='Reply to Aniruddha Chaudhari'>Reply</a>                </div>    
+                <h6 class="comment-author">Aniruddha Chaudhari</h6>
+                <div class="comment-date">
+                    June 24, 2018 at 11:20 pm                </div> 
+                <div class="comment-text">
+                    <p>Hi Perry.</p>
+<p>I am not much into raspberry pi and other hardware chips, and did not come across this situation.  So not sure right now.</p>
+<p>Thanks!</p>
+                </div>   
+                            </div> 
+        </div>
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1 parent" id="comment-5411">
+        <div id="div-comment-5411" class="comment-body clearfix">
+            <div class="comment-avatar">
+                <img alt='' src='https://secure.gravatar.com/avatar/?s=50&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/?s=100&#038;d=mm&#038;r=g 2x' class='avatar avatar-50 photo avatar-default' height='50' width='50' />            </div>
+            <div class="comment-info">   
+                <div class="comment-reply">
+                    <a rel='nofollow' class='comment-reply-link' href='#comment-5411' data-commentid="5411" data-postid="2761" data-belowelement="div-comment-5411" data-respondelement="respond" aria-label='Reply to Jinnu'>Reply</a>                </div>    
+                <h6 class="comment-author">Jinnu</h6>
+                <div class="comment-date">
+                    October 11, 2018 at 6:07 pm                </div> 
+                <div class="comment-text">
+                    <p>Hi,</p>
+<p>Is it possible to call Scala code from python without pyspark like above code (calling c code from python)? Is it possible to call Scala code from python like above?</p>
+                </div>   
+                            </div> 
+        </div>
+    <ul class="children">
+    <li class="comment byuser comment-author-anicse bypostauthor odd alt depth-2" id="comment-5414">
+        <div id="div-comment-5414" class="comment-body clearfix">
+            <div class="comment-avatar">
+                <img alt='' src='https://secure.gravatar.com/avatar/c7502f93fff86dd4d2375f271bf9e732?s=50&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/c7502f93fff86dd4d2375f271bf9e732?s=100&#038;d=mm&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' />            </div>
+            <div class="comment-info">   
+                <div class="comment-reply">
+                    <a rel='nofollow' class='comment-reply-link' href='#comment-5414' data-commentid="5414" data-postid="2761" data-belowelement="div-comment-5414" data-respondelement="respond" aria-label='Reply to Aniruddha Chaudhari'>Reply</a>                </div>    
+                <h6 class="comment-author">Aniruddha Chaudhari</h6>
+                <div class="comment-date">
+                    October 11, 2018 at 7:36 pm                </div> 
+                <div class="comment-text">
+                    <p>Hi Jinnu,</p>
+<p>I am not sure about it as I have never tried that.</p>
+                </div>   
+                            </div> 
+        </div>
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+                </ul>
+            </div>
+
+        
+         
+
+        </div>
+    </div> 
+    
+              
+        <div id="single-post-comments-form" class="single-post-boxes single-post-comment-form clearfix">
+            	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="fm-box-title comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/calling-c-functions-from-python/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://www.csestack.org/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="Comment..."></textarea></p><p class="comment-form-author"><input id="author" name="author" type="text" placeholder="Name*" value="" size="30" /></p>
+<p class="comment-form-email"><input id="email" name="email" type="text" placeholder="Email*" value="" size="30" /></p>
+<p class="comment-form-url"><input id="url" name="url" type="text" placeholder="Website" value="" size="30" /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /><label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="comment-submit-button" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='2761' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="655c7bfb6f" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="133"/></p>			</form>
+			</div><!-- #respond -->
+	  
+        </div> 
+                             </div>
+                                </div>
+            </div>
+            <!-- content -->
+                        <aside id="sidebar" class="sidebar">
+                <div class="fm-box-layout sidebar-wrapper clearfix">
+                    <div class="sidebar-container">
+                    <div id="text-17" class="widget widget-box widget_text"><h3 class="fm-box-title widget-title clearfix">Basic Python Tutorial</h3>			<div class="textwidget"><div class="tutor-list">
+<ol start="0">
+<li><a href="https://www.csestack.org/python/">Python- Tutorial Overview</a></li>
+<li><a href="https://www.csestack.org/install-python-on-linux/">Python &#8211; Setup on Linux</a></li>
+<li><a href="https://www.csestack.org/getting-started-with-python-for-beginners/">Python- Setup on Windows</a></li>
+<li><a href="https://www.csestack.org/basic-python3-syntax-code-example/">Python- Basic Syntax</a></li>
+<li><a href="https://www.csestack.org/program-python-check-type-variable-float-int-string-class/">Python- Variable Declaration</a></li>
+<li><a href="https://www.csestack.org/python-numeric-data-types-examples/">Python- Numeric Data Types</a></li>
+<li><a href="https://www.csestack.org/nonetype-in-python-null/">Python- NoneType</a></li>
+<li><a href="https://www.csestack.org/elif-nested-if-else-in-python-3-code-example-syntax/">Python- if-else/elif Statement</a></li>
+<li><a href="https://www.csestack.org/how-to-get-user-input-in-python/">Python- User Input</a></li>
+<li><a href="https://www.csestack.org/multiline-user-input-in-python/">Python- Multiline User Input</a></li>
+<li><a href="https://www.csestack.org/python-string-formatting/">Python- String Formatting</a></li>
+<li><a href="https://www.csestack.org/difference-between-range-and-xrange-python/">Python- Range Function</a></li>
+<li><a href="https://www.csestack.org/python-list/">Python- List</a></li>
+<li><a href="https://www.csestack.org/difference-tuple-list-python/">Python- List Vs Tuple</a></li>
+<li><a href="https://www.csestack.org/difference-between-sort-sorted-python-list-performance/">Python- Sorting List</a></li>
+<li><a href="https://www.csestack.org/difference-between-remove-del-pop-python-list/">Python- Deleting Element from List</a></li>
+<li><a href="https://www.csestack.org/python-dictionary/">Python- Dictionary</a></li>
+<li><a href="https://www.csestack.org/difference-between-is-equals-python/">Python- &#8216;is&#8217; vs &#8216;==&#8217;</a></li>
+<li><a href="https://www.csestack.org/difference-between-mutable-and-immutable-in-python/">Mutable and Immutable Datatype</a></li>
+<li><a href="https://www.csestack.org/python-yield-vs-return-explained-detail-examples/">Yield and Generator Function</a></li>
+<li><a href="https://www.csestack.org/python-lambda-function-list-comprehension-map-filter-reduce/">Python- Lambda Function</a></li>
+<li><a href="https://www.csestack.org/managing-python-modules-using-pip/">Python- Installing Modules</a></li>
+<li><a href="https://www.csestack.org/most-useful-python-libraries-jobs/">Most Useful Python Modules</a></li>
+<li><a href="https://www.csestack.org/python-list-installed-modules-versions-pip/">Find all the Installed Modules</a></li>
+<li><a href="https://www.csestack.org/best-python-ide-complete-tutorial-to-setup-python-with-pycharm/">PyCharm &#8211; IDE setup</a></li>
+<li><a href="https://www.csestack.org/file-handling-python-program-example/">Python- File Handling</a></li>
+<li><a href="https://www.csestack.org/code-for-gui-calculator-in-python/">Python- Working with GUI</a></li>
+<li><a href="https://www.csestack.org/python-getrefcount-reference-count-memory-management/">Python- Memory Management</a></li>
+<li><a href="https://www.csestack.org/calling-c-functions-from-python/">Python- Calling C Function</a></li>
+</ol>
+</div>
+</div>
+		</div><div id="text-35" class="widget widget-box widget_text"><h3 class="fm-box-title widget-title clearfix">Python String</h3>			<div class="textwidget"><div class="tutor-list">
+<ul>
+<li><a href="https://www.csestack.org/reverse-string-in-python-using-extended-slice-syntax/" rel="noopener noreferrer">Reverse the String</a></li>
+<li><a href="https://www.csestack.org/get-permutations-of-string-in-python-itertools/" rel="noopener noreferrer">Permutations of String</a></li>
+<li><a href="https://www.csestack.org/python-padding-number-string/">Padding Zeros to String/Number</a></li>
+</ul>
+</div>
+</div>
+		</div><div id="text-36" class="widget widget-box widget_text"><h3 class="fm-box-title widget-title clearfix">Python List</h3>			<div class="textwidget"><div class="tutor-list">
+<ul>
+<li><a href="https://www.csestack.org/randomly-select-item-from-list-in-python/" rel="noopener noreferrer">Randomly Select Item from List</a></li>
+<li><a href="https://www.csestack.org/unique-elements-from-list-in-python/" rel="noopener noreferrer">Find Unique Elements from List</a></li>
+<li><a href="https://www.csestack.org/python-check-if-all-elements-in-list-are-same/" rel="noopener">Are all Elements in List Same?</a></li>
+</ul>
+</div>
+</div>
+		</div><div id="text-37" class="widget widget-box widget_text"><h3 class="fm-box-title widget-title clearfix">Python Dictionary</h3>			<div class="textwidget"><div class="tutor-list">
+<ul>
+<li><a href="https://www.csestack.org/set-default-dictionary-python-value/" rel="noopener noreferrer">Set Default Value in Dictionary</a></li>
+<li><a href="https://www.csestack.org/remove-all-0-from-a-dictionary-in-python/" rel="noopener noreferrer">Remove all 0 from a dictionary</a></li>
+</ul>
+</div>
+</div>
+		</div><div id="text-18" class="widget widget-box widget_text"><h3 class="fm-box-title widget-title clearfix">Python Exercise</h3>			<div class="textwidget"><div class="tutor-list">
+<ol>
+<li><a href="https://www.csestack.org/quiz/python/" target="_blank" rel="noopener noreferrer">Python MCQ Test Online</a></li>
+<li><a href="https://www.csestack.org/interview-coding-questions-programming-language/" target="_blank" rel="noopener noreferrer">50+ Coding Questions [Practice]</a></li>
+<li><a href="https://www.csestack.org/python-competitive-programming-questions-practice/">Competitive Coding Questions</a></li>
+</ol>
+</div>
+</div>
+		</div><div id="text-51" class="widget widget-box widget_text"><h3 class="fm-box-title widget-title clearfix">Other Python Articles</h3>			<div class="textwidget"><p><strong>Compilation &amp; Byte Code:</strong></p>
+<div class="tutor-list">
+<ul>
+<li><a href="https://www.csestack.org/how-run-different-python-versions-cmd/">Different Py Versions on Single Syst</a></li>
+<li><a href="https://www.csestack.org/convert-py-pyc-python-compile/" rel="noopener noreferrer">Convert .py file .pyc file</a></li>
+<li><a href="https://www.csestack.org/how-to-deassemble-python-bytecode/" rel="noopener noreferrer">Disassemble Python Bytecode</a></li>
+</ul>
+</div>
+<p><strong>File Handling:</strong></p>
+<div class="tutor-list">
+<ul>
+<li><a href="https://www.csestack.org/how-to-read-csv-file-in-python/">Python- Read CSV File into List</a></li>
+<li><a href="https://www.csestack.org/python-check-if-file-directory-exists/" rel="noopener">Check if the File Exist in Python</a></li>
+<li><a href="https://www.csestack.org/find-the-longest-line-from-file-in-python/" rel="noopener noreferrer">Find Longest Line from File</a></li>
+</ul>
+</div>
+<p><strong>Sorting Algorithm:</strong></p>
+<div class="tutor-list">
+<ul>
+<li><a href="https://www.csestack.org/python-selection-sort/" rel="noopener">Selection Sorting Tutorial</a></li>
+<li><a href="https://www.csestack.org/quicksort/" target="_blank" rel="noopener noreferrer">QuickSort Sorting Tutorial</a></li>
+</ul>
+</div>
+<p><strong>Other:</strong></p>
+<div class="tutor-list">
+<ul>
+<li><a href="https://www.csestack.org/clear-python-interpreter-console/">Clear Py Interpreter Console</a></li>
+<li><a href="https://www.csestack.org/android-mobile-game-using-python/">Can I build Mobile App in Python?</a></li>
+<li><a href="https://www.csestack.org/python-extract-emails-read-file/" rel="noopener">Extract all the Emails from File</a></li>
+<li><a href="https://www.csestack.org/python-vs-shell-scripting/">Python Shell Scripting</a></li>
+</ul>
+</div>
+</div>
+		</div>                    </div>
+                 </div>
+            </aside>
+            <!-- sidebar -->
+                    </div>
+        </div>
+    </div>
+    <!-- container -->
+ 
+    <footer id="footer" class="footer-layout-1 footer-skin-dark clearfix">
+                <div class="footer-row-1 footer-widgets">
+            <div class="footer-row-wrapper">
+                <div class="footer-cols clearfix">
+                    <div class="footer-cols-wrapper">
+                        <div class="f-col">
+                            <div class="f-col-wrapper clearfix">
+                                <div id="tag_cloud-4" class="widget widget-box widget_tag_cloud"><h3 class="fm-box-title widget-title clearfix">Favorite Topic</h3><div class="tagcloud"><a href="https://www.csestack.org/tag/ai/" class="tag-cloud-link tag-link-168 tag-link-position-1" style="font-size: 11px;">AI</a>
+<a href="https://www.csestack.org/tag/bigdata/" class="tag-cloud-link tag-link-124 tag-link-position-2" style="font-size: 11px;">bigdata</a>
+<a href="https://www.csestack.org/tag/bit-manipulation/" class="tag-cloud-link tag-link-6 tag-link-position-3" style="font-size: 11px;">bit manipulation</a>
+<a href="https://www.csestack.org/tag/c-string/" class="tag-cloud-link tag-link-272 tag-link-position-4" style="font-size: 11px;">c-string</a>
+<a href="https://www.csestack.org/tag/career/" class="tag-cloud-link tag-link-143 tag-link-position-5" style="font-size: 11px;">career</a>
+<a href="https://www.csestack.org/tag/code/" class="tag-cloud-link tag-link-2 tag-link-position-6" style="font-size: 11px;">Code</a>
+<a href="https://www.csestack.org/tag/computer-network/" class="tag-cloud-link tag-link-43 tag-link-position-7" style="font-size: 11px;">Computer Network</a>
+<a href="https://www.csestack.org/tag/cpp/" class="tag-cloud-link tag-link-5 tag-link-position-8" style="font-size: 11px;">cpp</a>
+<a href="https://www.csestack.org/tag/data-analytics/" class="tag-cloud-link tag-link-125 tag-link-position-9" style="font-size: 11px;">data analytics</a>
+<a href="https://www.csestack.org/tag/database/" class="tag-cloud-link tag-link-132 tag-link-position-10" style="font-size: 11px;">database</a>
+<a href="https://www.csestack.org/tag/data-scientist/" class="tag-cloud-link tag-link-202 tag-link-position-11" style="font-size: 11px;">data scientist</a>
+<a href="https://www.csestack.org/tag/data-structure/" class="tag-cloud-link tag-link-62 tag-link-position-12" style="font-size: 11px;">Data Structure</a>
+<a href="https://www.csestack.org/tag/db/" class="tag-cloud-link tag-link-108 tag-link-position-13" style="font-size: 11px;">db</a>
+<a href="https://www.csestack.org/tag/dbms/" class="tag-cloud-link tag-link-118 tag-link-position-14" style="font-size: 11px;">DBMS</a>
+<a href="https://www.csestack.org/tag/difference-between/" class="tag-cloud-link tag-link-55 tag-link-position-15" style="font-size: 11px;">difference between</a>
+<a href="https://www.csestack.org/tag/django/" class="tag-cloud-link tag-link-227 tag-link-position-16" style="font-size: 11px;">Django</a>
+<a href="https://www.csestack.org/tag/education/" class="tag-cloud-link tag-link-142 tag-link-position-17" style="font-size: 11px;">education</a>
+<a href="https://www.csestack.org/tag/gate/" class="tag-cloud-link tag-link-90 tag-link-position-18" style="font-size: 11px;">GATE</a>
+<a href="https://www.csestack.org/tag/gate-topper-interview/" class="tag-cloud-link tag-link-184 tag-link-position-19" style="font-size: 11px;">GATE Topper Interview</a>
+<a href="https://www.csestack.org/tag/html/" class="tag-cloud-link tag-link-180 tag-link-position-20" style="font-size: 11px;">HTML</a>
+<a href="https://www.csestack.org/tag/ibm/" class="tag-cloud-link tag-link-103 tag-link-position-21" style="font-size: 11px;">ibm</a>
+<a href="https://www.csestack.org/tag/ibm-isdl/" class="tag-cloud-link tag-link-36 tag-link-position-22" style="font-size: 11px;">IBM ISDL</a>
+<a href="https://www.csestack.org/tag/ide/" class="tag-cloud-link tag-link-219 tag-link-position-23" style="font-size: 11px;">IDE</a>
+<a href="https://www.csestack.org/tag/interview/" class="tag-cloud-link tag-link-45 tag-link-position-24" style="font-size: 11px;">interview</a>
+<a href="https://www.csestack.org/tag/ip-address/" class="tag-cloud-link tag-link-133 tag-link-position-25" style="font-size: 11px;">IP address</a>
+<a href="https://www.csestack.org/tag/java/" class="tag-cloud-link tag-link-67 tag-link-position-26" style="font-size: 11px;">Java</a>
+<a href="https://www.csestack.org/tag/java-oops-concepts/" class="tag-cloud-link tag-link-291 tag-link-position-27" style="font-size: 11px;">Java Oops Concepts</a>
+<a href="https://www.csestack.org/tag/javascript/" class="tag-cloud-link tag-link-210 tag-link-position-28" style="font-size: 11px;">JavaScript</a>
+<a href="https://www.csestack.org/tag/jobs/" class="tag-cloud-link tag-link-79 tag-link-position-29" style="font-size: 11px;">Jobs</a>
+<a href="https://www.csestack.org/tag/linked-list/" class="tag-cloud-link tag-link-12 tag-link-position-30" style="font-size: 11px;">Linked List</a>
+<a href="https://www.csestack.org/tag/linux/" class="tag-cloud-link tag-link-160 tag-link-position-31" style="font-size: 11px;">linux</a>
+<a href="https://www.csestack.org/tag/linux-cmd/" class="tag-cloud-link tag-link-161 tag-link-position-32" style="font-size: 11px;">linux cmd</a>
+<a href="https://www.csestack.org/tag/machine-learning/" class="tag-cloud-link tag-link-130 tag-link-position-33" style="font-size: 11px;">machine learning</a>
+<a href="https://www.csestack.org/tag/nit/" class="tag-cloud-link tag-link-96 tag-link-position-34" style="font-size: 11px;">nit</a>
+<a href="https://www.csestack.org/tag/programming/" class="tag-cloud-link tag-link-80 tag-link-position-35" style="font-size: 11px;">Programming</a>
+<a href="https://www.csestack.org/tag/python/" class="tag-cloud-link tag-link-72 tag-link-position-36" style="font-size: 11px;">Python</a>
+<a href="https://www.csestack.org/tag/python-dictionary/" class="tag-cloud-link tag-link-298 tag-link-position-37" style="font-size: 11px;">Python Dictionary</a>
+<a href="https://www.csestack.org/tag/python-list/" class="tag-cloud-link tag-link-164 tag-link-position-38" style="font-size: 11px;">python list</a>
+<a href="https://www.csestack.org/tag/python-string/" class="tag-cloud-link tag-link-257 tag-link-position-39" style="font-size: 11px;">python string</a>
+<a href="https://www.csestack.org/tag/soap/" class="tag-cloud-link tag-link-100 tag-link-position-40" style="font-size: 11px;">SOAP</a>
+<a href="https://www.csestack.org/tag/sorting/" class="tag-cloud-link tag-link-20 tag-link-position-41" style="font-size: 11px;">sorting</a>
+<a href="https://www.csestack.org/tag/string/" class="tag-cloud-link tag-link-35 tag-link-position-42" style="font-size: 11px;">string</a>
+<a href="https://www.csestack.org/tag/vim/" class="tag-cloud-link tag-link-229 tag-link-position-43" style="font-size: 11px;">vim</a>
+<a href="https://www.csestack.org/tag/webbrowser/" class="tag-cloud-link tag-link-205 tag-link-position-44" style="font-size: 11px;">webbrowser</a>
+<a href="https://www.csestack.org/tag/web-development/" class="tag-cloud-link tag-link-136 tag-link-position-45" style="font-size: 11px;">web development</a></div>
+</div>                            </div>
+                        </div>
+                        <div class="f-col">
+                            <div class="f-col-wrapper clearfix">
+                                                            </div>
+                        </div>
+                        <div class="f-col">
+                            <div class="f-col-wrapper clearfix">
+                                <div id="nav_menu-3" class="widget widget-box widget_nav_menu"><h3 class="fm-box-title widget-title clearfix">About CSEstack Portal</h3><div class="menu-about-portal-container"><ul id="menu-about-portal" class="menu"><li id="menu-item-1533" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1533"><a href="http://www.csestack.org/recomended-gate-books-for-cse/">Recommended Books by Expert</a></li>
+</ul></div></div>                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="footer-row-2">
+            <div class="footer-row-wrapper">
+                <div class="footer-extra-info clearfix">
+                    <div class="footer-left">
+                                                    <div class="footer-row-element footer-logo"><div class="footer-logo-wrapper"></div></div> 
+                                                <p class="copyright-text">© 2019 – CSEstack.org. All Rights Reserved.</p>
+                    </div>
+                    <div class="footer-right">
+                                                    <nav class="footer-row-element" id="footer-menu"><ul class="second-menu-list"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-144"><a href="https://www.csestack.org/">Home</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146"><a href="http://csestack.org/subscribe/">Subscribe</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-153"><a href="https://www.csestack.org/write-for-us/">Contribute Us</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-887"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeCMS1m5gDIHuc8TrcPteiEcT8_bhf1EFvDVwiN9Wu06c_Hlw/viewform?c=0&#038;w=1">Share Your Interview Experience</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152"><a href="https://www.csestack.org/contact-us/">Contact Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-53"><a href="https://www.csestack.org/about/">About</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-886"><a href="https://www.csestack.org/about/">About CSEstack</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="http://www.csestack.org/campus-ambassador-program-csestack/">Campus Ambassador</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-381"><a href="https://www.facebook.com/groups/csestack/">Forum &#038; Discus</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-468"><a href="http://www.csestack.org/decimal-binary-hexadecimal-octal-converter/">Tools for Geek</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1075"><a href="https://www.csestack.org/lb/">LeaderBoard</a></li>
+</ul></nav>                                            </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- wrapper -->
+
+    		<!-- Start of StatCounter Code -->
+		<script>
+			<!--
+			var sc_project=10623349;
+			var sc_security="367e37df";
+						var scJsHost = (("https:" == document.location.protocol) ?
+				"https://secure." : "http://www.");
+			//-->
+			
+document.write("<sc"+"ript src='" +scJsHost +"statcounter.com/counter/counter.js'></"+"script>");		</script>
+				<noscript><div class="statcounter"><a title="web analytics" href="https://statcounter.com/"><img class="statcounter" src="https://c.statcounter.com/10623349/0/367e37df/0/" alt="web analytics" /></a></div></noscript>
+		<!-- End of StatCounter Code -->
+		<script async>(function(s,u,m,o,j,v){j=u.createElement(m);v=u.getElementsByTagName(m)[0];j.async=1;j.src=o;j.dataset.sumoSiteId='b2d8e90097260a00ee6f30005287b8009db630004efe09007e7f7c004591bc00';j.dataset.sumoPlatform='wordpress';v.parentNode.insertBefore(j,v)})(window,document,'script','//load.sumo.com/');</script>    <script type="application/javascript">
+      var ajaxurl = "https://www.csestack.org/wp-admin/admin-ajax.php";
+
+      function sumo_add_woocommerce_coupon(code) {
+        jQuery.post(ajaxurl, {
+          action: 'sumo_add_woocommerce_coupon',
+          code: code,
+        });
+      }
+
+      function sumo_remove_woocommerce_coupon(code) {
+        jQuery.post(ajaxurl, {
+          action: 'sumo_remove_woocommerce_coupon',
+          code: code,
+        });
+      }
+
+      function sumo_get_woocommerce_cart_subtotal(callback) {
+        jQuery.ajax({
+          method: 'POST',
+          url: ajaxurl,
+          dataType: 'html',
+          data: {
+            action: 'sumo_get_woocommerce_cart_subtotal',
+          },
+          success: function(subtotal) {
+            return callback(null, subtotal);
+          },
+          error: function(err) {
+            return callback(err, 0);
+          }
+        });
+      }
+    </script>
+    <script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAS3.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushColdFusion.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushClojure.js?ver=20090602'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCSharp.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCss.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDelphi.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDiff.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushErlang.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushFSharp.js?ver=20091003'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushGroovy.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJavaFX.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushLatex.js?ver=20090613'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushMatlabKey.js?ver=20091209'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushObjC.js?ver=20091207'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPerl.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPowerShell.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushR.js?ver=20100919'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushRuby.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushScala.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSql.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushVb.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0.9b'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://www.csestack.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/themes/fenomen/includes/assets/js/retina.js?ver=1.3.0'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/themes/fenomen/includes/assets/js/sticky.js?ver=1.0.3'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/themes/fenomen/includes/assets/js/fitvids.js?ver=1.1'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/themes/fenomen/includes/magnific-popup/js/magnific-popup.js?ver=1.0.0'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/themes/fenomen/includes/assets/js/infinite.scroll.js?ver=2.4'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/themes/fenomen/includes/assets/js/inf.trigger.js?ver=1.0'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"https:\/\/www.csestack.org\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.1.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var eafl_public = {"home_url":"https:\/\/www.csestack.org\/","ajax_url":"https:\/\/www.csestack.org\/wp-admin\/admin-ajax.php","nonce":"8d4c3eea6c"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/easy-affiliate-links/assets/js/public.js?ver=3.0.0'></script>
+<script type='text/javascript' async src='https://clientcdn.pushengage.com/core/6b975142b9136bbdc82ff9cf2a280b78.js?ver=5.2.1'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-includes/js/comment-reply.min.js?ver=5.2.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"fenomen-footer-column-3","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":0,"screen_max_height":0,"width_inherit":false,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["nav_menu-3"]}];
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/q2w3-fixed-widget/js/q2w3-fixed-widget.min.js?ver=5.1.9'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var newsletter = {"messages":{"email_error":"The email is not correct","name_error":"The name is not correct","surname_error":"The last name is not correct","profile_error":"","privacy_error":"You must accept the privacy statement"},"profile_max":"20"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.csestack.org/wp-content/plugins/newsletter/subscription/validate.js?ver=6.0.5'></script>
+<script type='text/javascript' src='https://www.csestack.org/wp-includes/js/wp-embed.min.js?ver=5.2.1'></script>
+<script async="async" type='text/javascript' src='https://www.csestack.org/wp-content/plugins/akismet/_inc/form.js?ver=4.1.2'></script>
+<script type="text/javascript">(function($) {"use strict"; $( document ).ready(function() {
+    
+
+});
+
+
+/* To highlight current tool in online tool bar */
+$(function(){
+  $('a').each(function() {
+    if ($(this).prop('href') == window.location.href) {
+      $(this).addClass('current');
+    }
+  });
+  
+  
+    $('.buttonGetInterview').click(function() {
+      showInput();
+  });
+  
+    $('.buttonGetInterview').ready(function() {
+      getCompanyList();
+  });
+  
+});
+
+
+function getCompanyList() {
+  var companies = [
+  'Accenture', 'Adobe' ,'AgriChain', 'Akamai', 'Altiux', 
+  'Amazon', 'Amdocs', 'American Express', 
+  'Attra Infotech',
+  'BARC', 'Barclays', 'BlockGrain', 'BYJUS',
+  'Cisco', 'Cognizant', 'Cohesity', 'Coupon Dunia', 'Credit Suisse', 
+  'DE Shaw', 'Druva', 
+  'Experis IT','Eze Software', 
+  'Factset', 'Fiorano', 
+  'General Electric', 
+  'Incture Technologies', 'Infosys',
+  'Kasmo',
+  'Microsoft', 'MindTree', 'Mu Sigma',
+  'Numerify', 
+  'Opteamix', 'Oracle', 
+  'Persistent','Pole to Win',
+  'Qualcomm', 
+  'Reliance', 'Riverbed',
+  'syntel',
+  'TCS', 'Tech Mahindra', 'Teradata', 'Terralogic',
+  'Virtusa',
+  'Wipro'
+  ];
+
+  var options = '';
+  for(var i = 0; i < companies.length; i++)
+    options += '<option value="'+companies[i]+'" />';
+  document.getElementById('companyList2').innerHTML = options;
+}
+
+function showInput() {
+       var strComp = document.getElementById("user_inputdata2").value;
+
+       var x = document.getElementById("companyList2");
+       var bFound = 0;
+       var i;
+
+       for (i = 0; i < x.options.length; i++) {
+          if(x.options[i].value ===  strComp) {
+             bFound = 1;
+             var strSlug = strComp.replace(/\s+/g, '-').toLowerCase();
+             var strHref=  "'"+"https://www.csestack.org/tag/"+strSlug+"/'";
+             var strTarget = "target='_blank'";
+             var strLink = "<a href="+strHref+" target='_blank'>"+strComp+"</a>";
+             document.getElementById('display2').innerHTML = strLink;
+             break;
+          }
+        }
+        if(bFound === 0)
+            document.getElementById('display2').innerHTML = "not found";
+    }})(jQuery);</script>
+    </body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 168/221 objects using disk
+Page Caching using disk: enhanced (SSL caching disabled) 
+Database Caching 1/24 queries in 0.020 seconds using disk
+
+Served from: www.csestack.org @ 2019-06-05 11:34:22 by W3 Total Cache
+-->
