@@ -1,2 +1,5 @@
 We are trying to see what happens when we merge Branches to a file.
 
+This is branced off Master and now in testB.
+This commit is in testB.
+
